@@ -23,7 +23,6 @@
                     <img src="https://img.shields.io/badge/Chess.com-5C8A47?style=flat-square&logo=chess.com&logoColor=white" alt="Chess.com">
                 </a>
             </p>
-            
             <p>
                 Aspiring to be a <b>cracked CS person</b> and <b>cracked dev</b> 🦾
                 <br>
