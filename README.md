@@ -7,11 +7,22 @@
 <table>
     <tr>
         <td align="center" width="200">
-            <img src="https://github.com/Sri-Hari-Haran-Sharma.png" alt="Profile Picture" width="150" height="150" style="border-radius: 50%; object-fit: cover;">
+            <img src="./assets/profile.jpg" alt="Profile Picture" width="150" height="150" style="border-radius: 50%; object-fit: cover;">
         </td>
         <td width="450">
             <h1>Sri Hari Haran Sharma</h1>
             <h3>Computer Science | Software Engineering</h3>
+            <p>
+                <a href="https://www.linkedin.com/in/sri-hariharan-sharma-aa1478286">
+                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn">
+                </a>
+                <a href="https://x.com/hariharangurum1">
+                    <img src="https://img.shields.io/badge/X-000000?style=flat-square&logo=x&logoColor=white" alt="X">
+                </a>
+                <a href="https://www.chess.com/member/harry_chessing">
+                    <img src="https://img.shields.io/badge/Chess.com-5C8A47?style=flat-square&logo=chess.com&logoColor=white" alt="Chess.com">
+                </a>
+            </p>
             <p>
                 <a href="https://github.com/Sri-Hari-Haran-Sharma?tab=repositories">
                     <img src="https://img.shields.io/github/public-repos/Sri-Hari-Haran-Sharma?style=flat-square&label=Repositories&color=black&logo=github" alt="Repositories">
@@ -24,9 +35,12 @@
                 </a>
             </p>
             <p>
-                I build software with a focus on fundamentals, clarity, and long-term maintainability.
+                Aspiring to be a <b>cracked CS person</b> and <b>cracked dev</b> 🦾
                 <br>
-                Currently exploring <b>Full Stack Development</b> and <b>Cloud Systems</b>.
+                <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> <i>Usually found breaking production or fixing it</i>
+            </p>
+            <p align="center">
+                 <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="100%" alt="Coding Cat">
             </p>
             <a href="https://github.com/settings/profile">
                 <img src="https://img.shields.io/badge/Edit%20Profile-EFEFEF?style=for-the-badge&logoColor=black&labelColor=EFEFEF&color=EFEFEF" alt="Edit Profile">
