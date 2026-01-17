@@ -23,17 +23,7 @@
                     <img src="https://img.shields.io/badge/Chess.com-5C8A47?style=flat-square&logo=chess.com&logoColor=white" alt="Chess.com">
                 </a>
             </p>
-            <p>
-                <a href="https://github.com/Sri-Hari-Haran-Sharma?tab=repositories">
-                    <img src="https://img.shields.io/github/public-repos/Sri-Hari-Haran-Sharma?style=flat-square&label=Repositories&color=black&logo=github" alt="Repositories">
-                </a>
-                <a href="https://github.com/Sri-Hari-Haran-Sharma?tab=followers">
-                    <img src="https://img.shields.io/github/followers/Sri-Hari-Haran-Sharma?style=flat-square&label=Followers&color=black&logo=github" alt="Followers">
-                </a>
-                <a href="https://github.com/Sri-Hari-Haran-Sharma?tab=following">
-                    <img src="https://img.shields.io/github/following/Sri-Hari-Haran-Sharma?style=flat-square&label=Following&color=black&logo=github" alt="Following">
-                </a>
-            </p>
+            
             <p>
                 Aspiring to be a <b>cracked CS person</b> and <b>cracked dev</b> 🦾
                 <br>
@@ -65,10 +55,10 @@
 
 ## Selected Projects
 
-| Project               | Description                                                                                                                                                                                            | Tech Stack           |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
-| **OrangeLens**        | Android-first application under active development, focused on building a structured and distraction-free user experience. Designed with emphasis on performance, scalability, and clean architecture. | Kotlin, Android      |
-| **what-iam-learning** | A continuously evolving knowledge repository documenting concepts, patterns, and insights across computer science, software engineering, and tooling. Used as a system for learning through writing.   | TypeScript, Markdown |
+| Project               | Description                                                                                                                                                                                          | Tech Stack           |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| **OrangeLens**        | An app and protocol designed to combat misinformation.                                                                                                                                               | Kotlin, Android      |
+| **what-iam-learning** | A continuously evolving knowledge repository documenting concepts, patterns, and insights across computer science, software engineering, and tooling. Used as a system for learning through writing. | TypeScript, Markdown |
 
 These projects represent intentional, long-term work rather than short-lived experiments.
 
@@ -77,12 +67,12 @@ These projects represent intentional, long-term work rather than short-lived exp
 ## GitHub Activity
 
 <div align="center">
-    <img src="https://github-readme-stats.vercel.app/api?username=Sri-Hari-Haran-Sharma&show_icons=true&theme=dracula&hide_border=true" height="180" alt="GitHub stats" />
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sri-Hari-Haran-Sharma&layout=compact&theme=dracula&hide_border=true" height="180" alt="Top languages" />
+    <img src="https://github-readme-stats.vercel.app/api?username=channi23&show_icons=true&theme=dracula&hide_border=true" height="180" alt="GitHub stats" />
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=channi23&layout=compact&theme=dracula&hide_border=true" height="180" alt="Top languages" />
 </div>
 
 <br/>
 
 <div align="center">
-    <img src="https://github-readme-streak-stats.herokuapp.com/?user=Sri-Hari-Haran-Sharma&theme=dracula&hide_border=true" alt="GitHub streak" />
+    <img src="https://github-readme-streak-stats.herokuapp.com/?user=channi23&theme=dracula&hide_border=true" alt="GitHub streak" />
 </div>
