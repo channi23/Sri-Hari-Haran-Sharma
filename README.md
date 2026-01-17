@@ -4,11 +4,7 @@
 
 <br/>
 
-<table>
-    <tr>
-        <td align="center" width="200">
-            <img src="./assets/profile.jpg" alt="Profile Picture" width="150" height="150" style="border-radius: 50%; object-fit: cover;">
-        </td>
+<img src="https://media.giphy.com/media/26tn33aiU1UfCKn5K/giphy.gif" alt="Code is Art" width="100%" style="object-fit: cover;">
         <td width="450">
             <h1>Sri Hari Haran Sharma</h1>
             <h3>Computer Science | Software Engineering</h3>
