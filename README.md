@@ -1,9 +1,5 @@
 <div align="center">
 
-<img src="https://media.giphy.com/media/SWoSkN6DxTszqIKEqv/giphy.gif" width="100%" height="auto" alt="Banner Animation"/>
-
-<br/>
-
 <table>
     <tr>
         <td align="center" width="200">
