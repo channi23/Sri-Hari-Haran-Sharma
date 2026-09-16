@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Sri Hari Haran Sharma builds AI systems, backend infrastructure and open-source tools around JSON Schema." />
+		<meta name="theme-color" content="#f5f5f2" />
+		<title>Sri Hari Haran Sharma | AI Systems and Open Source</title>
+		<link rel="stylesheet" href="./site.css" />
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Cpath d='M8 8h16M8 16h16M8 24h16' stroke='white' stroke-width='2'/%3E%3C/svg%3E" />
+		<script src="./site.js" defer></script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+
+		<header class="site-header">
+			<a class="wordmark" href="#top" aria-label="Home">SHS</a>
+			<nav aria-label="Primary navigation">
+				<a href="#work">Work</a>
+				<a href="#open-source">Open source</a>
+				<a href="#writing">Writing</a>
+				<a href="#reading">Reading</a>
+			</nav>
+			<button class="theme-toggle" type="button" aria-pressed="false">Invert</button>
+		</header>
+
+		<main id="main">
+			<section class="hero" id="top">
+				<p class="kicker">AI systems engineering / backend / open source</p>
+				<h1>Sri Hari Haran<br />Sharma</h1>
+				<div class="hero-grid">
+					<p class="intro">I build practical AI systems and the backend infrastructure that makes them dependable. My current work spans agent workflows, model-assisted products, JSON Schema and distributed services.</p>
+					<p>I am interested in researching ideas and applying research through working software. I also use simulation software to make complex behavior visible, test assumptions and understand systems better.</p>
+				</div>
+				<div class="profile-links" aria-label="Profiles">
+					<a href="https://github.com/channi23" target="_blank" rel="noreferrer">GitHub</a>
+					<a href="https://in.linkedin.com/in/sri-hariharan-sharma-aa1478286" target="_blank" rel="noreferrer">LinkedIn</a>
+					<a href="https://hashnode.com/@blundharan" target="_blank" rel="noreferrer">Hashnode</a>
+				</div>
+			</section>
+
+			<section class="feature achievement" aria-labelledby="achievement-title">
+				<p class="section-label">Recognition</p>
+				<div>
+					<p class="feature-number">03</p>
+					<h2 id="achievement-title">Third place at Deccan AI Catalyst 2026</h2>
+					<p>Selected from a solo AI-agent hackathon with more than 1,500 registrations and 500 working agents. I built Sizuka, an AI recruiter agent for finding, evaluating and reaching out to candidates.</p>
+					<a class="text-link" href="https://lnkd.in/gbg5v8FC" target="_blank" rel="noreferrer">View the result</a>
+				</div>
+			</section>
+
+			<section class="section" id="work">
+				<div class="section-heading">
+					<p class="section-index">01</p>
+					<h2>AI, ML and deep learning projects</h2>
+				</div>
+
+				<div class="project-list">
+					<article class="project featured-project">
+						<div class="project-topline"><span>Agent system</span><span>Featured</span></div>
+						<h3>Sizuka</h3>
+						<p class="project-lede">An AI talent scouting agent that turns a job description into a live candidate discovery and outreach workflow.</p>
+						<p>Sizuka extracts hiring criteria, discovers developers through GitHub and Hacker News, analyses profiles, scores candidate fit with an LLM, generates personalised outreach and follows email replies. NestJS, BullMQ and Redis coordinate the workflow while a Python agent, PostgreSQL and a React dashboard handle intelligence, state and visibility.</p>
+						<ul class="tags"><li>LangGraph</li><li>NestJS</li><li>LLM evaluation</li><li>PostgreSQL</li><li>Redis</li></ul>
+						<a class="text-link" href="https://github.com/channi23/sizuka" target="_blank" rel="noreferrer">View repository</a>
+					</article>
+
+					<div class="project-grid">
+						<article class="project">
+							<div class="project-topline"><span>Applied AI</span><span>Mobile</span></div>
+							<h3>Pramana</h3>
+							<p>An AI-powered fact verification application designed for one-tap checking from the Android share sheet. It returns an explanation with traceable citations so the result can be inspected instead of merely trusted.</p>
+							<a class="text-link" href="https://github.com/channi23/Pramana" target="_blank" rel="noreferrer">View repository</a>
+						</article>
+
+						<article class="project">
+							<div class="project-topline"><span>Voice AI</span><span>Pipeline</span></div>
+							<h3>OrangeAI</h3>
+							<p>An AI voice-dubbing application structured around speech recognition, machine translation, text-to-speech, lip sync and audio mixing. The project includes a React interface, a TypeScript service and a durable local job queue.</p>
+							<a class="text-link" href="https://github.com/channi23/OrangeAI" target="_blank" rel="noreferrer">View repository</a>
+						</article>
+
+						<article class="project">
+							<div class="project-topline"><span>JSON Schema</span><span>Research prototype</span></div>
+							<h3>Ecosystem observability</h3>
+							<p>A small evidence pipeline for measuring JSON Schema adoption, validator compliance, draft evolution and ecosystem breadth. It combines package, repository and Bowtie signals into historical data that can be compared over time.</p>
+							<a class="text-link" href="https://github.com/channi23/json-schema-ecosystem-observability-poc" target="_blank" rel="noreferrer">View repository</a>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" id="open-source">
+				<div class="section-heading">
+					<p class="section-index">02</p>
+					<h2>Open source and JSON Schema</h2>
+				</div>
+				<div class="link-rows">
+					<a href="https://github.com/sourcemeta/blaze/pull/1065" target="_blank" rel="noreferrer"><span>Blaze</span><strong>Moved unevaluated cycle tests into draft suites</strong><small>PR 1065</small></a>
+					<a href="https://github.com/sourcemeta/blaze/pull/1056" target="_blank" rel="noreferrer"><span>Blaze</span><strong>Tested cyclic references in dependency analysis</strong><small>PR 1056</small></a>
+					<a href="https://github.com/hyperjump-io/json-schema-language-tools/pull/265" target="_blank" rel="noreferrer"><span>Hyperjump</span><strong>Fixed workspace watching and refresh behavior</strong><small>PR 265</small></a>
+					<a href="https://github.com/json-schema-org/ecosystem/pull/26" target="_blank" rel="noreferrer"><span>JSON Schema</span><strong>Added weekly ecosystem statistics collection</strong><small>PR 26</small></a>
+					<a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite/pull/867" target="_blank" rel="noreferrer"><span>JSON Schema</span><strong>Improved Test Suite documentation</strong><small>PR 867</small></a>
+				</div>
+			</section>
+
+			<section class="section" id="writing">
+				<div class="section-heading">
+					<p class="section-index">03</p>
+					<h2>Writing</h2>
+				</div>
+				<div class="writing-list">
+					<a href="https://json-schema.hashnode.dev/why-json-schema-is-the-missing-contract-in-ai-agent-communication" target="_blank" rel="noreferrer"><span>JSON Schema / AI agents</span><strong>Why JSON Schema Is the Missing Contract in AI Agent Communication</strong><small>Read article</small></a>
+					<a href="https://cracked-backend-dev.hashnode.dev/one-application-three-architectures" target="_blank" rel="noreferrer"><span>Software architecture</span><strong>One Application, Three Architectures</strong><small>Read article</small></a>
+					<a href="https://cracked-backend-dev.hashnode.dev/from-dns-to-localhost-a-practical-guide-to-backend-foundations" target="_blank" rel="noreferrer"><span>Backend foundations</span><strong>From DNS to Localhost: A Practical Guide to Backend Foundations</strong><small>Read article</small></a>
+				</div>
+			</section>
+
+			<section class="section" id="reading">
+				<div class="section-heading">
+					<p class="section-index">04</p>
+					<h2>Books that shape how I think</h2>
+				</div>
+				<div class="books-grid">
+					<div>
+						<h3>Technical</h3>
+						<ul class="book-list">
+							<li><strong>Mathematics for Machine Learning</strong><span>Marc Peter Deisenroth, A. Aldo Faisal and Cheng Soon Ong</span></li>
+							<li><strong>Designing Data-Intensive Applications</strong><span>Martin Kleppmann</span></li>
+							<li><strong>Database Management Systems</strong><span>Raghu Ramakrishnan and Johannes Gehrke</span></li>
+						</ul>
+					</div>
+					<div>
+						<h3>Beyond engineering</h3>
+						<ul class="book-list">
+							<li><strong>Think Like a Maths Genius</strong><span>Arthur Benjamin and Michael Shermer</span></li>
+							<li><strong>The Theory of Everything</strong><span>Stephen Hawking</span></li>
+							<li><strong>The Alchemist</strong><span>Paulo Coelho</span></li>
+							<li><strong>I'm OK, You're OK</strong><span>Thomas A. Harris</span></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="closing">
+				<p class="section-label">Current direction</p>
+				<p>Research an idea. Build the smallest useful version. Simulate the hard parts. Measure what changes.</p>
+			</section>
+		</main>
+
+		<footer>
+			<p><span id="year">2026</span> Sri Hari Haran Sharma</p>
+			<p>Built in black and white.</p>
+			<a href="#top">Back to top</a>
+		</footer>
+	</body>
+</html>
