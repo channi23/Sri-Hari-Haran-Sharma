@@ -211,6 +211,88 @@ code {
 .diagram-audit .audit-center { fill: none; stroke: #cbd0d4; stroke-width: 1.7; stroke-dasharray: 5 7; }
 .diagram-audit .center-label { fill: #8a8f94; font-size: 16px; font-weight: 700; text-anchor: middle; }
 
+.report-table-wrap {
+	margin: 30px 0 34px;
+	overflow-x: auto;
+	border: 1px solid var(--line);
+	border-radius: 12px;
+	background: #fff;
+}
+
+.report-table {
+	width: 100%;
+	min-width: 650px;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+
+.report-table th,
+.report-table td {
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--line);
+	text-align: left;
+}
+
+.report-table th {
+	background: #f8f9fa;
+	color: var(--muted);
+	font-size: 11px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.report-table tbody tr:last-child td { border-bottom: 0; }
+.report-table td:first-child { font-weight: 550; }
+.report-table td:nth-child(2),
+.report-table td:nth-child(3) { white-space: nowrap; }
+
+.status-pass {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: #0b7650;
+	font-size: 12px;
+	font-weight: 750;
+	letter-spacing: 0.06em;
+}
+
+.status-pass::before {
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--accent);
+	box-shadow: 0 0 14px rgba(23, 166, 115, 0.55);
+}
+
+.trust-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 14px;
+	margin: 4px 0 20px;
+}
+
+.trust-grid > div {
+	display: flex;
+	flex-direction: column;
+	min-height: 190px;
+	padding: 22px;
+	border: 1px solid rgba(33, 37, 41, 0.14);
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.trust-grid span {
+	margin-bottom: 36px;
+	color: var(--accent);
+	font-size: 12px;
+	font-weight: 750;
+	letter-spacing: 0.12em;
+}
+
+.trust-grid strong { font-size: 20px; }
+.trust-grid p { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+
 .closing-line { margin-top: 34px !important; font-size: 20px !important; font-weight: 500 !important; color: var(--ink) !important; }
 
 .article-footer {
@@ -247,6 +329,10 @@ code {
 	.readme-visual { grid-template-columns: 1fr; gap: 26px; }
 	.readme-callout { padding-left: 16px; border-left: 2px solid var(--ink); }
 	.readme-callout::before { display: none; }
+	.trust-stack { overflow: visible; padding-inline: 16px; }
+	.trust-grid { grid-template-columns: 1fr; }
+	.trust-grid > div { min-height: 0; }
+	.trust-grid span { margin-bottom: 20px; }
 	.article-footer { align-items: flex-start; gap: 20px; }
 }
 
