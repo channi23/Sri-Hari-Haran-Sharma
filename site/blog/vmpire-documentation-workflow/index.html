@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="A working documentation process for keeping a large, multi-month agent-built codebase honest with itself." />
+		<meta name="theme-color" content="#ffffff" />
+		<meta property="og:title" content="How I stopped my AI coding agents from turning my codebase into soup" />
+		<meta property="og:description" content="A documentation workflow for large agent-built software projects." />
+		<meta property="og:type" content="article" />
+		<title>How I stopped my AI coding agents from turning my codebase into soup | Sri Hari Haran Sharma</title>
+		<link rel="stylesheet" href="./article.css" />
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Cpath d='M8 8h16M8 16h16M8 24h16' stroke='white' stroke-width='2'/%3E%3C/svg%3E" />
+	</head>
+	<body>
+		<a class="skip-link" href="#article">Skip to article</a>
+
+		<header class="site-header">
+			<a class="brand" href="../../" aria-label="Sri Hari Haran Sharma home">
+				<span class="brand-mark">SHS</span>
+				<span>Sri Hari Haran Sharma</span>
+			</a>
+			<nav aria-label="Article navigation">
+				<a href="../../#work">Work</a>
+				<a href="../../#open-source">Open source</a>
+				<a href="../../#writing">Writing</a>
+			</nav>
+			<a class="home-link" href="../../">Portfolio</a>
+		</header>
+
+		<main>
+			<article id="article">
+				<header class="article-header">
+					<p class="article-label">Engineering notes</p>
+					<h1>How I stopped my AI coding agents from turning my codebase into soup</h1>
+					<p class="dek">A working process for keeping a large, multi-month agent-built project honest with itself.</p>
+
+					<div class="article-meta">
+						<div class="author">
+							<span class="avatar" aria-hidden="true">SH</span>
+							<div><strong>Sri Hari Haran Sharma</strong><span>Builder, AI systems and open source</span></div>
+						</div>
+						<div class="date"><time datetime="2026-09-18">September 18, 2026</time><span>8 min read</span></div>
+					</div>
+				</header>
+
+				<blockquote class="tldr"><strong>TL;DR:</strong> I made documentation a hard requirement for a large agent-built codebase. Every code directory gets a README, stale documentation blocks completion, and standing audits keep the project understandable long after the agent's context disappears.</blockquote>
+
+				<p>I have been building a real product with Claude Code, Codex, and whatever agent is having a good day for months now. Not toy projects. A full SvelteKit + Cloudflare platform called VMPire, with D1, KV, Queues, Cron triggers, the whole stack. Dozens of features. Hundreds of files. Team management, a competition registration system, a homegrown chatbot, the works.</p>
+
+				<p>And here is the thing nobody warns you about when they show you a slick fifteen-second demo of an agent "building an app." The demo always stops right before the part where the codebase gets big enough that even the AI forgets what it did last Tuesday.</p>
+
+				<p>So I did something boring but incredibly effective. I made documentation a hard requirement, not a nice-to-have. And it changed everything about how fast I can move, how confidently I can hand off work, and how little I dread opening a folder I have not touched in three weeks.</p>
+
+				<h2>The problem nobody puts in the demo video</h2>
+
+				<p>An AI agent is extremely good at writing code that works right now. It is much less naturally good at writing code that someone, including a future version of itself in a brand new context window with zero memory of today, can safely touch six weeks from now.</p>
+
+				<p>Left to its own devices, an agent will happily:</p>
+
+				<ul>
+					<li>Build the same feature twice under two different names because it forgot the first one existed.</li>
+					<li>Leave a component completely orphaned after replacing it because nothing told it to check.</li>
+					<li>Reference a theme, table, or component that was deleted three sessions ago.</li>
+					<li>Introduce a subtle race condition because nobody wrote down that the write path is not atomic.</li>
+					<li>Quietly skip a test that would have caught the exact bug it just shipped.</li>
+				</ul>
+
+				<p>None of that is a hallucination in the scary sense. It is what happens when the only memory a coding agent has is the file tree in front of it, and the file tree does not explain itself. Code tells you what it does. It almost never tells you why, or what happens if you poke it the wrong way.</p>
+
+				<h2>My fix: a README is not optional, it is a failing test</h2>
+
+				<p>Here is the actual rule, straight from my project's <code>CLAUDE.md</code>:</p>
+
+				<blockquote>Every directory that contains code must have its own <code>README.md</code>. A stale README is treated the same as a failing test. It blocks the phase from being marked done.</blockquote>
+
+				<p>That one sentence is doing more work for me than any linter I have ever installed.</p>
+
+				<figure class="diagram diagram-flow">
+					<svg viewBox="0 0 920 410" role="img" aria-labelledby="flow-title flow-desc">
+						<title id="flow-title">The documentation gate built into every development phase</title>
+						<desc id="flow-desc">Code is written, its README is created or updated, and accuracy is checked. Accurate documentation lets the phase continue. Inaccurate documentation blocks the phase until it is fixed.</desc>
+						<defs>
+							<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="currentColor" /></marker>
+						</defs>
+						<rect class="node" x="30" y="150" width="190" height="92" rx="15" />
+						<text class="node-title" x="125" y="190">Code written</text>
+						<text class="node-note" x="125" y="217">in a directory</text>
+						<path class="connector" d="M220 196 H310" marker-end="url(#arrow)" />
+						<rect class="node" x="320" y="150" width="210" height="92" rx="15" />
+						<text class="node-title" x="425" y="190">README.md</text>
+						<text class="node-note" x="425" y="217">created or updated</text>
+						<path class="connector" d="M530 196 H610" marker-end="url(#arrow)" />
+						<path class="node" d="M710 125 L810 196 L710 267 L610 196 Z" />
+						<text class="node-title" x="710" y="188">Is it still</text>
+						<text class="node-title" x="710" y="212">accurate?</text>
+						<path class="connector" d="M810 196 H882" marker-end="url(#arrow)" />
+						<text class="edge-label" x="842" y="178">yes</text>
+						<text class="end-label" x="880" y="230">Phase continues</text>
+						<path class="connector" d="M710 125 V76" marker-end="url(#arrow)" />
+						<text class="edge-label" x="724" y="102">no</text>
+						<rect class="blocked" x="610" y="20" width="200" height="54" rx="13" />
+						<text class="blocked-label" x="710" y="54">Phase blocked</text>
+						<path class="return" d="M610 47 H126 V139" marker-end="url(#arrow)" />
+						<text class="return-label" x="130" y="35">fix the documentation, then re-check</text>
+					</svg>
+					<figcaption>FIG. 1 - The documentation gate built into every phase.</figcaption>
+				</figure>
+
+				<p>Every README follows the same shape, every single time:</p>
+
+				<ol class="readme-sections">
+					<li><strong>What this does</strong><span>Plain language, like explaining it to a teammate over coffee, not a specification dump.</span></li>
+					<li><strong>How it fits into VMPire</strong><span>What depends on this, what this depends on, and which architecture document section it maps to.</span></li>
+					<li><strong>Files in this directory</strong><span>A one-line table. No mystery files.</span></li>
+					<li><strong>How to change or extend this</strong><span>The actual ways someone will try to modify it, including which way is wrong.</span></li>
+					<li><strong>Gotchas</strong><span>Timing dependencies, Cloudflare-specific behavior, and everything that is not obvious from reading the code.</span></li>
+				</ol>
+
+				<figure class="diagram diagram-readme">
+					<div class="readme-visual">
+						<div class="readme-card">
+							<strong>README.md</strong>
+							<span>1. What this does</span>
+							<span>2. How it fits into the project</span>
+							<span>3. Files in this directory</span>
+							<span>4. How to change or extend it</span>
+							<span class="gotcha">5. Gotchas</span>
+						</div>
+						<div class="readme-callout"><strong>The section that saves the most time.</strong><span>What is not obvious from reading the code.</span></div>
+					</div>
+					<figcaption>FIG. 2 - The fixed shape every README follows.</figcaption>
+				</figure>
+
+				<p>That last section, Gotchas, is the one that quietly saves me the most time. It is where the agent writes down the thing it just learned the hard way, so the next agent, or the next me, does not have to relearn it the hard way too.</p>
+
+				<p>The rule is not "write docs at the end when you remember." It is "the README gets created the same moment the first file in that folder does, and updated the moment anything in that folder changes meaningfully." Documentation debt never gets to accumulate because it is never allowed to exist in the first place.</p>
+
+				<h2>A real example, not a hypothetical one</h2>
+
+				<p>I recently had Claude build out a team management system: create a team, invite members, accept or decline, remove someone, leave a team, and register a whole team for a competition instead of just one person. Real backend, real schema, real UI. The kind of feature that touches five different parts of an app at once.</p>
+
+				<p>While it was auditing its own earlier work for a completely different feature, a theme system redesign that trimmed a four-option theme picker down to three, it looked for stale references and found two READMEs still describing a "Rainbow theme" that had been deleted sessions earlier. Nobody asked it to hunt for that specifically. It found it because the discipline of keeping directory docs honest had turned into a reflex, not a one-time chore. That is the point. The system does not rely on me remembering to ask.</p>
+
+				<p>Later, during a security pass, it noticed that a registration function was doing a "check if already registered, then insert" without any database-level guarantee against two requests racing each other. That is a genuinely nasty bug category. It only shows up under real concurrent traffic, such as a double click or two open tabs, and is a nightmare to reproduce after the fact. It was caught because the audit discipline treats duplicate point awards as a standing checklist item on every pass.</p>
+
+				<p>And then there was the chatbot. I wanted something that could answer real questions about a competition without paying for an external AI API on every message. The build uses intent detection, keyword matching, and a small TF-IDF similarity engine running locally against real competition data, with a hard rule that it must never call an external LLM.</p>
+
+				<p>The audit did not just eyeball the code and say it looked fine. It wrote an automated test that scans every file in that module for the literal string <code>fetch</code> or any known AI SDK import. If a future change tries to introduce a paid API call, a test fails immediately instead of someone noticing the bill three weeks later.</p>
+
+				<p>That is the actual value here. Not "the AI wrote code fast." Any agent can write code fast. The value is a system that keeps checking its own work and explaining itself to itself, so quality does not quietly decay as the codebase grows.</p>
+
+				<h2>Why this makes manual fixes easier</h2>
+
+				<p>Here is the part that matters for me as a human who still needs to open a text editor sometimes.</p>
+
+				<p>When I want to fix something myself, I do not need to ask an AI where the thing that handles X lives. I open the folder, read a five-minute README, and I already know:</p>
+
+				<ul>
+					<li>What the code is for.</li>
+					<li>What it depends on and what depends on it.</li>
+					<li>The two ways people usually break it.</li>
+					<li>The Cloudflare-specific trap that is not obvious from the code.</li>
+					<li>Whether my change is load bearing for three other features or safely isolated.</li>
+				</ul>
+
+				<p>I am not reverse engineering someone else's, or some agent's, intentions. The intentions are written down in the same commit as the code that embodies them. It is the closest thing I have found to a codebase that ages well instead of aging like unrefrigerated milk.</p>
+
+				<p>It also means I can drop an agent into the middle of a large existing project without babysitting it through a tour of the codebase. It reads the README in the folder it is about to touch, the same way I would, and gets useful in minutes instead of hallucinating a plausible-sounding guess about how something works.</p>
+
+				<h2>Why this scales</h2>
+
+				<p>The real test of any workflow is not whether it works on a small project. It is whether it survives twenty more features on top of the ten already shipped. A few things make this one hold up.</p>
+
+				<p><strong>Tests are part of the definition of done, not a chore for later.</strong> Every phase ends with a written test report: what was tested, what passed, and what remains a known gap. It gets appended to a running summary file. I am not relying on my own memory of whether something was tested. It is on disk, dated, and readable in thirty seconds.</p>
+
+				<p><strong>Phases are explicitly ordered, and the agent is told to stop and ask rather than guess.</strong> When something is ambiguous against the architecture docs, it does not invent scope on the fly. That single instruction has prevented more scope creep and silent wrong turns than any code review I have done.</p>
+
+				<p><strong>Audits are a standing habit, not a one-time event.</strong> Functionality, full user lifecycle, UI and UX polish, security and data integrity. The same buckets are revisited every time a major piece of work lands. "It worked when I tested it in isolation" and "it still works once three other features touch the same table" are very different claims. Only one matters in production.</p>
+
+				<figure class="diagram diagram-audit">
+					<svg viewBox="0 0 900 520" role="img" aria-labelledby="audit-title audit-desc">
+						<title id="audit-title">The standing audit repeated after every major landing</title>
+						<desc id="audit-desc">Four recurring audit areas surround each major release: functionality, full user lifecycle, interface polish, and security and integrity.</desc>
+						<defs><marker id="cycle-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="currentColor" /></marker></defs>
+						<circle class="audit-center" cx="450" cy="260" r="112" />
+						<text class="center-label" x="450" y="247">repeated on every</text>
+						<text class="center-label" x="450" y="276">major landing, not once</text>
+						<rect class="node" x="330" y="28" width="240" height="78" rx="15" />
+						<text class="node-title" x="450" y="63">Functionality</text>
+						<text class="node-note" x="450" y="87">does it do what it says</text>
+						<rect class="node" x="615" y="220" width="250" height="78" rx="15" />
+						<text class="node-title" x="740" y="255">Full user lifecycle</text>
+						<text class="node-note" x="740" y="279">not just in isolation</text>
+						<rect class="node" x="330" y="414" width="240" height="78" rx="15" />
+						<text class="node-title" x="450" y="449">UI and UX polish</text>
+						<text class="node-note" x="450" y="473">the felt experience</text>
+						<rect class="node" x="35" y="220" width="260" height="78" rx="15" />
+						<text class="node-title" x="165" y="255">Security and integrity</text>
+						<text class="node-note" x="165" y="279">races, duplicate writes</text>
+						<path class="connector" d="M280 220 C300 125 360 105 390 105" marker-end="url(#cycle-arrow)" />
+						<path class="connector" d="M570 105 C650 110 700 155 710 220" marker-end="url(#cycle-arrow)" />
+						<path class="connector" d="M710 298 C690 385 610 420 570 430" marker-end="url(#cycle-arrow)" />
+						<path class="connector" d="M330 430 C245 415 190 365 175 298" marker-end="url(#cycle-arrow)" />
+					</svg>
+					<figcaption>FIG. 3 - The standing audit, repeated on every major landing.</figcaption>
+				</figure>
+
+				<p><strong>Nothing gets merged on vibes.</strong> Work happens on a development branch, gets its own test report, and only lands on <code>main</code> once I have actually looked at it. The agent does the work. I still hold the pen on what ships.</p>
+
+				<h2>The unglamorous truth</h2>
+
+				<p>None of this is a clever prompt trick. There is no magic incantation that makes an AI agent "just get" your codebase. What works is closer to being a strict manager: force the documentation to exist at the moment the code is written, make a stale document count as a real failure, make audits a repeatable ritual instead of a vibe check, and never let "it works" substitute for "it is tested and written down why."</p>
+
+				<p>It is not exciting to write about. Nobody is making a viral demo out of "and then it updated a README." But it is the difference between an AI-built codebase that turns into something you are quietly afraid to touch, and one where I can hand a fresh agent, or my own tired brain at 11pm, a single folder and trust that the folder will tell us the truth about itself.</p>
+
+				<h2>If you want to steal this</h2>
+
+				<p>You do not need my exact project or stack for this to work. The parts that transfer are simple:</p>
+
+				<ul>
+					<li>Treat a missing or outdated README as a failing test, not a suggestion.</li>
+					<li>Write down the why, not the what. Code already tells you the what.</li>
+					<li>Keep a running log of what was tested and what was not, per unit of work, not per vibe.</li>
+					<li>Build standing audit passes for security, functionality, and real user flows.</li>
+					<li>Never let the agent merge its own homework. Someone still has to read it.</li>
+				</ul>
+
+				<p class="closing-line">Turns out the best AI coding workflow I have found is mostly good documentation discipline, enforced by a very literal-minded collaborator who never gets bored of writing READMEs and never merges anything without me looking first.</p>
+
+				<footer class="article-footer">
+					<p>Written by <strong>Sri Hari Haran Sharma</strong></p>
+					<a href="../../#writing">More writing</a>
+				</footer>
+			</article>
+		</main>
+	</body>
+</html>
