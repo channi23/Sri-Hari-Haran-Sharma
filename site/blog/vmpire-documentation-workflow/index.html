@@ -40,7 +40,7 @@
 							<span class="avatar" aria-hidden="true">SH</span>
 							<div><strong>Sri Hari Haran Sharma</strong><span>Builder, AI systems and open source</span></div>
 						</div>
-						<div class="date"><time datetime="2026-09-18">September 18, 2026</time><span>8 min read</span></div>
+						<div class="date"><time datetime="2026-09-18">September 18, 2026</time><span>15 min read</span></div>
 					</div>
 				</header>
 
@@ -168,11 +168,80 @@
 
 				<p>It also means I can drop an agent into the middle of a large existing project without babysitting it through a tour of the codebase. It reads the README in the folder it is about to touch, the same way I would, and gets useful in minutes instead of hallucinating a plausible-sounding guess about how something works.</p>
 
+				<h2>Tests are not a phase, they are a reflex</h2>
+
+				<p>Here is a habit that took me a while to trust, and now I cannot imagine working without it: every time functionality changes, both a unit test and an integration test get written right then. Not at the end of the week. Not "before we ship."</p>
+
+				<p>The split is simple, and I took it straight from my own project rules:</p>
+
+				<ul>
+					<li><strong>Unit tests</strong> live in <code>/tests/unit/</code> and cover pure functions with no database, network, or external dependency. Validators, similarity scoring, form parsers, and similar logic belong here.</li>
+					<li><strong>Integration tests</strong> live in <code>/tests/integration/</code> and hit a real local database or queue spun up for the test run. "The function works in isolation" and "the function works against real data with real constraints" are two different claims.</li>
+				</ul>
+
+				<p>A few real examples make the distinction clearer.</p>
+
+				<p>When I had the agent build the local chatbot's similarity matching, it did not just ship the matching logic. It wrote unit tests for the tokenizer, scoring function, and intent detector. It also wrote a separate test that scans the entire module for external network calls, so nobody can accidentally introduce a paid API later. Four test files, one small feature, written in the same pass as the code.</p>
+
+				<p>When it found the registration race condition, fixing the code was the easy part. Proving the fix works required a test using <code>Promise.all</code> to fire two registration attempts at the same time, then assert that only one wins and only one point award is created. A sequential test would never reproduce that bug. You have to shape the test like the bug.</p>
+
+				<p>When a feature touches five systems at once, such as registering a team for a competition, each piece passing its own tests is not enough. One more test walks the full path end to end: create the competition, publish it, form a team, register it, verify the points, verify the leaderboard, archive the competition, and confirm the data survives. That test exists to catch bugs at the seams between already-tested pieces.</p>
+
+				<p>The numbers make the habit obvious in hindsight. In one working session, the suite grew from a few hundred tests to well over 350 because every new piece of functionality brought its own tests with it. Nothing gets marked done with "looks right to me." It gets marked done with passing tests and a typecheck with zero errors.</p>
+
+				<p>That is the difference between an agent that writes code and an agent that ships working software. The code was never the hard part. Proving it keeps working, especially when two features quietly step on each other, is the actual job.</p>
+
+				<h2>The paper trail: one report per chunk of work, one index for all of them</h2>
+
+				<p>Tests prove the code works today. They do not tell a human six weeks from now why something was built, what was checked, and what was deliberately left for later. That is what the report layer is for.</p>
+
+				<p>Every finished chunk of work gets a markdown file in <code>/tests/reports/</code>, following the same shape every time:</p>
+
+				<ul>
+					<li>A short summary of what changed.</li>
+					<li>A table of every unit and integration test that ran, with its result and a note for any failure.</li>
+					<li>A known issues and follow-ups section for work deliberately deferred, not silently dropped.</li>
+					<li>A plain yes-or-no sign-off on whether it is safe to build the next thing on top.</li>
+				</ul>
+
+				<p>No exceptions. An empty or skipped report counts as an unfinished phase, just like a failing test.</p>
+
+				<p>Each report gets one line in a running <code>SUMMARY.md</code>. Scroll through it and the build history is visible on one screen:</p>
+
+				<div class="report-table-wrap" role="region" aria-label="Example project test report summary" tabindex="0">
+					<table class="report-table">
+						<thead><tr><th>Work item</th><th>Status</th><th>Date</th></tr></thead>
+						<tbody>
+							<tr><td>Team + Participation-Type Schema (Foundation)</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+							<tr><td>Team Management System (Service Layer)</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+							<tr><td>Internal Registration Rebuild (Step 1)</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+							<tr><td>Admin Competition Fields + Participation-Type Display</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+							<tr><td>Kepler: Local NLP Competition Assistant (Steps 4-11)</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+							<tr><td>Security / Data-Integrity Audit (Step 19)</td><td><span class="status-pass">PASS</span></td><td>2026-09-02</td></tr>
+						</tbody>
+					</table>
+				</div>
+
+				<p>This is not a changelog written for marketing. It is the literal order in which things were built, with each line pointing to a report and the test table behind it.</p>
+
+				<p>Git log tells you what changed in diff form. It does not tell you why a race-condition fix happened, what was tested before the feature was called done, or which known gap was left on purpose. The report turns that reconstruction job into a five-minute read.</p>
+
+				<p>It also closes a loop that documentation alone cannot. A README tells you how code is supposed to work. A report tells you that, on a specific date, someone ran the tests and confirmed it did. I want both kinds of trust.</p>
+
+				<figure class="diagram trust-stack">
+					<div class="trust-grid">
+						<div><span>01</span><strong>README</strong><p>Explains the code permanently and captures the why.</p></div>
+						<div><span>02</span><strong>Test file</strong><p>Proves a specific claim now and every time the suite runs.</p></div>
+						<div><span>03</span><strong>Report</strong><p>Records what changed, what passed, and what remains.</p></div>
+					</div>
+					<figcaption>FIG. 3 - The three layers of trust: explanation, proof, and a dated paper trail.</figcaption>
+				</figure>
+
+				<p>Feature built, tests written, outcome documented. All three happen in the same sitting. None is optional, and none is left for later, because later is exactly when it stops happening.</p>
+
 				<h2>Why this scales</h2>
 
-				<p>The real test of any workflow is not whether it works on a small project. It is whether it survives twenty more features on top of the ten already shipped. A few things make this one hold up.</p>
-
-				<p><strong>Tests are part of the definition of done, not a chore for later.</strong> Every phase ends with a written test report: what was tested, what passed, and what remains a known gap. It gets appended to a running summary file. I am not relying on my own memory of whether something was tested. It is on disk, dated, and readable in thirty seconds.</p>
+				<p>The real test of any workflow is not whether it works on a small project. It is whether it survives twenty more features on top of the ten already shipped. A few more habits make this hold up beyond the docs, tests, and reports.</p>
 
 				<p><strong>Phases are explicitly ordered, and the agent is told to stop and ask rather than guess.</strong> When something is ambiguous against the architecture docs, it does not invent scope on the fly. That single instruction has prevented more scope creep and silent wrong turns than any code review I have done.</p>
 
@@ -203,30 +272,30 @@
 						<path class="connector" d="M710 298 C690 385 610 420 570 430" marker-end="url(#cycle-arrow)" />
 						<path class="connector" d="M330 430 C245 415 190 365 175 298" marker-end="url(#cycle-arrow)" />
 					</svg>
-					<figcaption>FIG. 3 - The standing audit, repeated on every major landing.</figcaption>
+					<figcaption>FIG. 4 - The standing audit, repeated on every major landing.</figcaption>
 				</figure>
 
 				<p><strong>Nothing gets merged on vibes.</strong> Work happens on a development branch, gets its own test report, and only lands on <code>main</code> once I have actually looked at it. The agent does the work. I still hold the pen on what ships.</p>
 
 				<h2>The unglamorous truth</h2>
 
-				<p>None of this is a clever prompt trick. There is no magic incantation that makes an AI agent "just get" your codebase. What works is closer to being a strict manager: force the documentation to exist at the moment the code is written, make a stale document count as a real failure, make audits a repeatable ritual instead of a vibe check, and never let "it works" substitute for "it is tested and written down why."</p>
+				<p>None of this is a clever prompt trick. There is no magic incantation that makes an AI agent "just get" your codebase. What works is closer to being a strict manager: force the documentation to exist when the code is written, force a test to exist when behavior changes, force a report to exist when a chunk of work is called done, and never let "it works" substitute for "it is tested and written down why."</p>
 
-				<p>It is not exciting to write about. Nobody is making a viral demo out of "and then it updated a README." But it is the difference between an AI-built codebase that turns into something you are quietly afraid to touch, and one where I can hand a fresh agent, or my own tired brain at 11pm, a single folder and trust that the folder will tell us the truth about itself.</p>
+				<p>It is not exciting to write about. Nobody is making a viral demo out of "and then it updated a README and wrote a report." But it is the difference between an AI-built codebase that turns into something you are quietly afraid to touch, and one where I can hand a fresh agent, or my own tired brain at 11pm, a single folder and trust that its documentation, tests, and report will tell us the truth about itself.</p>
 
 				<h2>If you want to steal this</h2>
 
-				<p>You do not need my exact project or stack for this to work. The parts that transfer are simple:</p>
+				<p>You do not need my exact project or stack for this to work. The parts that transfer work best as one system, not three separate tips:</p>
 
 				<ul>
-					<li>Treat a missing or outdated README as a failing test, not a suggestion.</li>
-					<li>Write down the why, not the what. Code already tells you the what.</li>
-					<li>Keep a running log of what was tested and what was not, per unit of work, not per vibe.</li>
-					<li>Build standing audit passes for security, functionality, and real user flows.</li>
-					<li>Never let the agent merge its own homework. Someone still has to read it.</li>
+					<li>Treat a missing or outdated README as a failing test, not a suggestion. It explains the why, which code alone never does.</li>
+					<li>Write the unit test and integration test in the same sitting as the behavior change. Shape the test after the bug, especially for concurrency or money-like operations that must never fire twice.</li>
+					<li>Close every chunk of work with a written report: what changed, what was tested, what was deliberately deferred, and whether it is safe to build on. Append it to a running summary index.</li>
+					<li>Build standing audit passes for security, functionality, real user flows, and UI polish instead of hoping problems announce themselves.</li>
+					<li>Never let the agent merge its own homework. Someone still has to read the report and inspect the diff.</li>
 				</ul>
 
-				<p class="closing-line">Turns out the best AI coding workflow I have found is mostly good documentation discipline, enforced by a very literal-minded collaborator who never gets bored of writing READMEs and never merges anything without me looking first.</p>
+				<p class="closing-line">Turns out the best AI coding workflow I have found is mostly good documentation discipline, a reflexive testing habit, and an honest paper trail. All of it is enforced by a very literal-minded collaborator who never gets bored of writing READMEs and never merges anything without me looking first.</p>
 
 				<footer class="article-footer">
 					<p>Written by <strong>Sri Hari Haran Sharma</strong></p>
