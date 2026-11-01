@@ -240,6 +240,15 @@ h1 {
 .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 32px 0 0; list-style: none; }
 .tags li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
 
+
+.experience-list { min-width: 0; border-top: 1px solid var(--line); }
+.experience-entry { display: grid; grid-template-columns: minmax(170px, 0.8fr) minmax(0, 2fr); gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.experience-date { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.experience-type { margin: 7px 0 0; font-size: 12px; color: var(--muted); }
+.experience-entry h3 { margin: 0; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.08; letter-spacing: -0.035em; }
+.experience-company { margin: 8px 0 12px; font-weight: 700; }
+.experience-entry div:last-child > p:last-child { margin: 0; color: var(--muted); }
+
 .link-rows,
 .writing-list { border-top: 1px solid var(--line); }
 
@@ -307,6 +316,7 @@ footer a { text-underline-offset: 4px; }
 }
 
 @media (max-width: 620px) {
+	.experience-entry { grid-template-columns: 1fr; gap: 12px; }
 	.site-header, main, footer { width: min(calc(100% - 28px), var(--max)); }
 	.site-header { min-height: 62px; }
 	h1 { margin: 42px 0 60px; }
