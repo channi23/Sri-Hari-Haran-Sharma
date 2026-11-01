@@ -241,13 +241,17 @@ h1 {
 .tags li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
 
 
-.experience-list { min-width: 0; border-top: 1px solid var(--line); }
-.experience-entry { display: grid; grid-template-columns: minmax(170px, 0.8fr) minmax(0, 2fr); gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); }
-.experience-date { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
-.experience-type { margin: 7px 0 0; font-size: 12px; color: var(--muted); }
-.experience-entry h3 { margin: 0; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.08; letter-spacing: -0.035em; }
-.experience-company { margin: 8px 0 12px; font-weight: 700; }
-.experience-entry div:last-child > p:last-child { margin: 0; color: var(--muted); }
+.experience-list { min-width: 0; }
+.experience-card { display: flex; flex-direction: column; background: var(--panel); padding: 32px; min-width: 0; }
+.experience-featured { padding: clamp(30px, 5vw, 64px); margin-bottom: 16px; }
+.experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.experience-grid .experience-card { min-height: 380px; }
+.experience-card h3 { margin: 46px 0 10px; font-size: clamp(30px, 3.2vw, 48px); line-height: 1; letter-spacing: -0.055em; }
+.experience-featured h3 { font-size: clamp(38px, 5vw, 70px); }
+.experience-company { margin: 0 0 22px; font-size: clamp(19px, 2vw, 25px); font-weight: 700; letter-spacing: -0.025em; }
+.experience-card > p:not(.experience-company) { margin: 0; max-width: 740px; }
+.experience-card .tags { margin-top: auto; padding-top: 30px; }
+.experience-featured .tags { margin-top: 30px; padding-top: 0; }
 
 .link-rows,
 .writing-list { border-top: 1px solid var(--line); }
@@ -309,14 +313,16 @@ footer a { text-underline-offset: 4px; }
 	.profile-links { justify-content: flex-start; }
 	.feature > div { grid-template-columns: 0.35fr 1.2fr; }
 	.feature > div > p:not(.feature-number), .feature .text-link { grid-column: 2; }
-	.project-grid { grid-template-columns: 1fr; }
+	.project-grid, .experience-grid { grid-template-columns: 1fr; }
 	.project-grid .project { min-height: 360px; }
 	.section-heading { display: grid; grid-template-columns: 50px 1fr; align-items: start; }
 	.section-heading h2 { margin: 0; }
 }
 
 @media (max-width: 620px) {
-	.experience-entry { grid-template-columns: 1fr; gap: 12px; }
+	.experience-grid { grid-template-columns: 1fr; }
+	.experience-grid .experience-card { min-height: 0; }
+	.experience-card, .experience-featured { padding: 24px; }
 	.site-header, main, footer { width: min(calc(100% - 28px), var(--max)); }
 	.site-header { min-height: 62px; }
 	h1 { margin: 42px 0 60px; }
